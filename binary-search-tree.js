@@ -55,13 +55,13 @@ class BinarySearchTree {
     const insert = (node) => {
       if (val < node.val) {
         if(node.left === null){
-          node.left = newNode(val);
+          node.left = new Node(val);
         } else {
           insert(node.left);
         }
       } else if (val > node.val){
         if(node.right === null){
-          node.right = newNode(val);
+          node.right = new Node(val);
         }else {
           insert(node.right)
         }
@@ -94,22 +94,13 @@ class BinarySearchTree {
    * return the node, if found; else undefined. Uses recursion. */
 
   findRecursively(val) {
-    if(this.root === null) {
-      return undefined;
-    }
-
     const find = (node) => {
+      if (node === null) return undefined; 
       if(node.val === val){
         return node
       }
 
-      if (val < node.val){
-        find(node.left);
-      } else if(val > node.val){
-        find(node.right)
-      } else{
-        return undefined;
-      }
+      
     }
     return find(this.root);
   }
@@ -175,7 +166,20 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   bfs() {
-
+    let data = [];  
+    let queue = []; 
+    let node = this.root;
+  
+    queue.push(node);
+  
+    while (queue.length) {
+      node = queue.shift();
+      data.push(node.val);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+  
+    return data; 
   }
 
   /** Further Study!
