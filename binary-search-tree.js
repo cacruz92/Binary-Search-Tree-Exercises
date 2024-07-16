@@ -99,7 +99,8 @@ class BinarySearchTree {
       if(node.val === val){
         return node
       }
-
+      if (val < node.val) return find(node.left);
+      if (val > node.val) return find(node.right);
       
     }
     return find(this.root);
