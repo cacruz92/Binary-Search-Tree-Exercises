@@ -32,7 +32,7 @@ class BinarySearchTree {
         }
         current = current.left;
       } else if (val > current.val){
-        if (current.right ==== null) {
+        if (current.right === null) {
           current.right = newNode;
           return this;
         }
@@ -47,7 +47,28 @@ class BinarySearchTree {
    * Returns the tree. Uses recursion. */
 
   insertRecursively(val) {
+      if(this.root === null){
+      this.root = new Node(val);
+      return this;
+    }
 
+    const insert = (node) => {
+      if (val < node.val) {
+        if(node.left === null){
+          node.left = newNode(val);
+        } else {
+          insert(node.left);
+        }
+      } else if (val > node.val){
+        if(node.right === null){
+          node.right = newNode(val);
+        }else {
+          insert(node.right)
+        }
+      }
+    };
+    insert(this.root);
+    return this;
   }
 
   /** find(val): search the tree for a node with value val.
